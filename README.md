@@ -69,7 +69,7 @@ _(`"$schema"` is entirely optional, but it'll give you autocomplete and inline v
 
 ```json
 {
-	"$schema": "https://unpkg.com/@bsmth/sequence-loader/schema/SequenceOptions.json",
+	"$schema": "https://unpkg.com/@bsmth/sequence-loader@1.0.0/schema/SequenceOptions.json",
 	"files": "./path/to/my/sequence/*.png"
 }
 ```
