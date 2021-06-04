@@ -1,0 +1,7 @@
+node_modules/
+dist/
+schema
+.DS_Store
+.tscc_temp
+yarn-error.log
+.husky

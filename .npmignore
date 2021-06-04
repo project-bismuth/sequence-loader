@@ -1,0 +1,14 @@
+src/
+scripts/
+rollup.config.js
+tsconfig.json
+tslint.json
+.editorconfig
+.clang-format
+.nvmrc
+.eslintignore
+.eslintrc.js
+.prettierignore
+.github/
+yarn.lock
+yarn-error.log
