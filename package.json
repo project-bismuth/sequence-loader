@@ -1,6 +1,6 @@
 {
 	"name": "@bsmth/sequence-loader",
-	"version": "1.0.0",
+	"version": "1.0.1",
 	"description": "Streamlined sprite animation packing for webpack.",
 	"main": "dist/cjs/loader.js",
 	"module": "dist/esm/loader.js",
@@ -67,7 +67,7 @@
 		"loader-utils": "^2.0.0",
 		"maxrects-packer": "^2.7.2",
 		"schema-utils": "^3.0.0",
-		"sharp": "^0.27.0"
+		"sharp": "^0.28.3"
 	},
 	"husky": {
 		"hooks": {
