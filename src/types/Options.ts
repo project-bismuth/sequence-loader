@@ -1,3 +1,5 @@
+import type { LogLevel } from '@bsmth/loader-progress';
+
 /* eslint-disable max-len */
 export interface InternalSequenceOptions {
 	/**
@@ -44,14 +46,14 @@ export interface InternalSequenceOptions {
 	 * */
 	relative: boolean;
 	/**
-	 * Maximum width in pixels a page image may be.
+	 * Maximum width in pixels a page image (atlas) may be.
 	 * Note that multiple pages may be created to fit all frames.
 	 *
 	 * @default 4096
 	 * */
 	pageMaxWidth: number;
 	/**
-	 * Maximum height in pixels a page image may be.
+	 * Maximum height in pixels a page image (atlas) may be.
 	 * Note that multiple pages may be created to fit all frames.
 	 *
 	 * @default 4096
@@ -87,6 +89,14 @@ export interface SequenceLoaderOptions extends Partial<Omit<InternalSequenceOpti
 	 * @default 'esm'
 	 * */
 	output?: 'commonjs' | 'esm';
+	/**
+	 * How progress updates are displayed in the console.
+	 *
+	 * `'pretty'` may conflict with existing progress UIs, set to `'simple'` or `'off'` in that case.
+	 *
+	 * @default 'pretty'
+	 * */
+	logLevel?: LogLevel;
 }
 
 export interface SequenceOptions extends Partial<InternalSequenceOptions> {

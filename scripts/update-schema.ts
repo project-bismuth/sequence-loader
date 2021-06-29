@@ -9,12 +9,13 @@ import { writeFileSync, mkdirSync, existsSync } from 'fs';
 const generator = createGenerator({
 	path: './src/types/Options.ts',
 	tsconfig: './scripts/tsconfig-schema.json',
+	expose: 'none',
 	type: '*',
 });
 
 const writeSchema = ( type: string ) => {
 	const schema = generator.createSchema( type );
-	const definition = schema.definitions[type] as Record<string, unknown>;
+	const definition = schema.definitions['*'] as Record<string, unknown>;
 
 	delete schema.definitions;
 	delete schema.$ref;

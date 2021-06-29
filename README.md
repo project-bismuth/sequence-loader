@@ -186,10 +186,11 @@ Note that you'll receive an array of pages, since `TexturePacker` would create a
 You can also add the above options as loader options. The'll act as defaults.
 Additionally loader-specific options are:
 
-| Name                   | Type                  | Default | Description                                                  |
-| ---------------------- | --------------------- | ------- | ------------------------------------------------------------ |
-| `generateDeclarations` | `boolean`             | `false` | Whether to output a .d.ts files next to imported JSONs.<br />This provides correct types based on your settings. |
-| `output`               | `'esm' \| 'commonjs'` | `'esm'` | What module format the JS output should be generated in.     |
+| Name                   | Type                            | Default    | Description                                                  |
+| ---------------------- | ------------------------------- | ---------- | ------------------------------------------------------------ |
+| `generateDeclarations` | `boolean`                       | `false`    | Whether to output a .d.ts files next to imported JSONs.<br />This provides correct types based on your settings. |
+| `output`               | `'esm' \| 'commonjs'`           | `'esm'`    | What module format the JS output should be generated in.     |
+| `logLevel`             | `'pretty' \| 'simple' \| 'off'` | `'pretty'` | How progress updates are displayed in the console.<br />`'pretty'` may conflict with existing progress UIs, set to `'simple'` or `'off'` in that case. |
 
 ---
 
