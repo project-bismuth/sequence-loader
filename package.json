@@ -1,6 +1,6 @@
 {
 	"name": "@bsmth/sequence-loader",
-	"version": "1.0.1",
+	"version": "1.1.0",
 	"description": "Streamlined sprite animation packing for webpack.",
 	"main": "dist/cjs/loader.js",
 	"module": "dist/esm/loader.js",
@@ -60,7 +60,7 @@
 	},
 	"dependencies": {
 		"@bsmth/loader-cache": "^1.0.1",
-		"@bsmth/loader-progress": "^1.0.0",
+		"@bsmth/loader-progress": "^1.1.0",
 		"chalk": "^4.1.1",
 		"glob": "^7.1.7",
 		"glob-promise": "^4.2.0",

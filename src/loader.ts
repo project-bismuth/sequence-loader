@@ -5,6 +5,7 @@ import { createHash } from 'crypto';
 import loaderUtils from 'loader-utils';
 import { validate } from 'schema-utils';
 import { ensureCacheReady } from '@bsmth/loader-cache';
+import { setLogLevel } from '@bsmth/loader-progress';
 
 import type {
 	InternalSequenceOptions,
@@ -37,6 +38,7 @@ export default async function load( source: string ): Promise<string> {
 		baseDataPath: 'sequence.json',
 	});
 
+	setLogLevel( globalOptions.logLevel || 'pretty' );
 
 	// merge options with defaults
 	const options: InternalSequenceOptions = {
@@ -51,7 +53,7 @@ export default async function load( source: string ): Promise<string> {
 		format: 'default',
 		imageQuery: '',
 		// omit options not configurable locally
-		...omit(['generateDeclarations', 'output'], globalOptions ),
+		...omit(['generateDeclarations', 'output', 'logLevel'], globalOptions ),
 		// omit options that are irrelevant but valid
 		...omit(['$schema'], localOptions ),
 	};
