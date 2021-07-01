@@ -172,7 +172,8 @@ export default async function sequenceFromImgs({
 
 
 	// create a layout from the the frames list
-	packer.repack();
+	// passing 'false' causes the packer to repack all bins
+	packer.repack( false );
 
 
 	const frames: Sequence<string>['frames'] = [];
