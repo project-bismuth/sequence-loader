@@ -11,6 +11,7 @@ import {
 
 import type { Sequence } from '../types/Sequence';
 import type { SequenceOptions } from '../types/Options';
+import composite from './composite';
 import { omit } from './utils';
 
 
@@ -224,13 +225,14 @@ export default async function sequenceFromImgs({
 			});
 		});
 
-		// paint the frames on top of our base image
-		img.composite( subFrames );
-
 		// write the resulting file to cache,
 		// this returns its absolute path
 		const pageFilePath = await cacheWrite({
-			buffer: await img.png().toBuffer(),
+			// paint the frames on top of our base image
+			buffer: await composite({
+				initial: img,
+				jobs: subFrames,
+			}),
 			...pageCacheOpts( pageIndex ),
 		});
 
