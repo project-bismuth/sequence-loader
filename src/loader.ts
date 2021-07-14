@@ -58,7 +58,7 @@ export default async function load( source: string ): Promise<string> {
 		...omit(['$schema'], localOptions ),
 	};
 
-	const useEsm = globalOptions.output.toLowerCase() !== 'commonjs';
+	const useEsm = !( globalOptions.output && globalOptions.output.toLowerCase() === 'commonjs' );
 
 	const {
 		resource,
