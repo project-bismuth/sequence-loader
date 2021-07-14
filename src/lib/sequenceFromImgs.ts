@@ -78,9 +78,9 @@ export default async function sequenceFromImgs({
 	// are purged by marking them as invalid
 	invalidateChildren( resource );
 
-	// start spinner
-	const completeJob = trackJob({
-		text: 'building sequence',
+	// start reading spinner
+	const completeRead = trackJob({
+		text: `reading ${inputFrames.length} frames`,
 		reportName: resource,
 	});
 
@@ -176,6 +176,15 @@ export default async function sequenceFromImgs({
 		);
 	}) );
 
+	// stop reading spinner
+	completeRead();
+
+	// start packing spinner
+	const completePacking = trackJob({
+		text: 'packing sequence',
+		reportName: resource,
+	});
+
 
 	// create a layout from the the frames list
 	// passing 'false' causes the packer to repack all bins
@@ -267,8 +276,8 @@ export default async function sequenceFromImgs({
 		...cacheOpts,
 	});
 
-	// stop spinner
-	completeJob();
+	// stop packing spinner
+	completePacking();
 
 
 	return sequence;
