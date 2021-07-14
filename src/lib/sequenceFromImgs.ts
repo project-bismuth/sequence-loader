@@ -161,11 +161,16 @@ export default async function sequenceFromImgs({
 			{
 				frame: i,
 				buffer: data,
-				padding: {
+				padding: options.trim ? {
 					top: -trimOffsetTop,
 					left: -trimOffsetLeft,
 					bottom: fullHeight - trimmedHeight + trimOffsetTop,
 					right: fullWidth - trimmedWidth + trimOffsetLeft,
+				} : {
+					top: 0,
+					left: 0,
+					bottom: 0,
+					right: 0,
 				},
 			},
 		);
