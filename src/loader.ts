@@ -110,6 +110,8 @@ export default async function load( source: string ): Promise<string> {
 			sequenceHash = hasher.digest();
 		}
 
+		hasher.destroy();
+
 		return {
 			data,
 			path: frame,
