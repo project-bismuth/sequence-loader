@@ -16,11 +16,11 @@ interface Frame {
 export type PackedFrame = [
 	x: number,
 	y: number,
-	width: number,
-	height: number,
-	paddingLeft: number,
-	paddingTop: number,
 	page: number,
+	width?: number,
+	height?: number,
+	paddingLeft?: number,
+	paddingTop?: number,
 ];
 
 

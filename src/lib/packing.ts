@@ -6,10 +6,20 @@ export function packFrames( frames: Sequence['frames']): PackedFrame[] {
 	// make sure the frames are in the correct order,
 	// since we'll be storing that info as the index
 	return frames.sort( ( a, b ) => a.frame - b.frame ).map( ({
-		x, y, width, height, padding, page,
-	}) => [
-		x, y, width, height, padding.left, padding.top, page,
-	]);
+		x, y, page, width, height, padding,
+	}) => {
+		if (
+			padding.top === 0
+			&& padding.bottom === 0
+			&& padding.left === 0
+			&& padding.right === 0
+		) {
+			return [x, y, page];
+		}
+		return [
+			x, y, page, width, height, padding.left, padding.top,
+		];
+	});
 }
 
 
@@ -40,9 +50,15 @@ export function unpack( sequence: PackedSequence, relative = false ): Sequence {
 		}) ),
 
 		frames: frames.map( (
-			[x, y, width, height, left, top, page],
+			[x, y, page, ...data],
 			frame,
 		) => {
+			const isUntrimmed = data.length === 0;
+			const width = isUntrimmed ? sequenceWidth : data[0];
+			const height = isUntrimmed ? sequenceHeight : data[1];
+			const left = isUntrimmed ? 0 : data[2];
+			const top = isUntrimmed ? 0 : data[3];
+
 			if ( !relative ) {
 				return {
 					frame,

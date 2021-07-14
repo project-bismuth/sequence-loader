@@ -11,6 +11,7 @@ import {
 
 import type { Sequence } from '../types/Sequence';
 import type { SequenceOptions } from '../types/Options';
+import composite from './composite';
 import { omit } from './utils';
 
 
@@ -77,9 +78,9 @@ export default async function sequenceFromImgs({
 	// are purged by marking them as invalid
 	invalidateChildren( resource );
 
-	// start spinner
-	const completeJob = trackJob({
-		text: 'building sequence',
+	// start reading spinner
+	const completeRead = trackJob({
+		text: `reading ${inputFrames.length} frames`,
 		reportName: resource,
 	});
 
@@ -160,15 +161,29 @@ export default async function sequenceFromImgs({
 			{
 				frame: i,
 				buffer: data,
-				padding: {
+				padding: options.trim ? {
 					top: -trimOffsetTop,
 					left: -trimOffsetLeft,
 					bottom: fullHeight - trimmedHeight + trimOffsetTop,
 					right: fullWidth - trimmedWidth + trimOffsetLeft,
+				} : {
+					top: 0,
+					left: 0,
+					bottom: 0,
+					right: 0,
 				},
 			},
 		);
 	}) );
+
+	// stop reading spinner
+	completeRead();
+
+	// start packing spinner
+	const completePacking = trackJob({
+		text: 'packing sequence',
+		reportName: resource,
+	});
 
 
 	// create a layout from the the frames list
@@ -224,13 +239,14 @@ export default async function sequenceFromImgs({
 			});
 		});
 
-		// paint the frames on top of our base image
-		img.composite( subFrames );
-
 		// write the resulting file to cache,
 		// this returns its absolute path
 		const pageFilePath = await cacheWrite({
-			buffer: await img.png().toBuffer(),
+			// paint the frames on top of our base image
+			buffer: await composite({
+				initial: img,
+				jobs: subFrames,
+			}),
 			...pageCacheOpts( pageIndex ),
 		});
 
@@ -260,8 +276,8 @@ export default async function sequenceFromImgs({
 		...cacheOpts,
 	});
 
-	// stop spinner
-	completeJob();
+	// stop packing spinner
+	completePacking();
 
 
 	return sequence;
